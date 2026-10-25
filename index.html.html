@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Minicurso (celeste): Criterio de la segunda derivada</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f9ff;--card:#fff;--tx:#17293a;--mu:#52687c;--ac:#1573b0;--bd:#cfe5f5;--hl:#e3f2fc;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1b27;--card:#172635;--tx:#e6f1fa;--mu:#9fb6c9;--ac:#6ec1f2;--bd:#284155;--hl:#1d3446}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 'Nunito',system-ui,sans-serif}
+nav{position:sticky;top:0;background:var(--card);border-bottom:1px solid var(--bd);display:flex;gap:4px;overflow-x:auto;padding:10px 12px;z-index:5;font-family:system-ui,sans-serif;font-size:15px}
+nav a{white-space:nowrap;padding:6px 12px;border-radius:20px;color:var(--tx);text-decoration:none}
+nav a:hover{background:var(--hl)}
+section{max-width:860px;margin:0 auto;padding:44px 20px;border-bottom:1px solid var(--bd)}
+h1{font-size:2.2rem;line-height:1.2;margin:.3em 0}h2{font-size:1.7rem;color:var(--ac);margin:0 0 .6em}h3{color:var(--ac);margin:1.4em 0 .3em}
+.cover{text-align:center;padding-top:60px}.cover .data{display:inline-block;text-align:left;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:18px 26px;margin-top:18px;font-family:system-ui,sans-serif;font-size:15px}
+.box{background:var(--hl);border-left:5px solid var(--ac);padding:12px 16px;border-radius:6px;margin:14px 0}
+.m{font-family:'Cambria Math','Times New Roman',serif;font-style:italic;font-size:1.08em}
+table{border-collapse:collapse;width:100%;font-family:system-ui,sans-serif;font-size:15px;background:var(--card)}td,th{border:1px solid var(--bd);padding:8px;text-align:left}th{background:var(--hl)}
+.wrap{overflow-x:auto}
+.vid{background:var(--card);border:2px dashed var(--bd);border-radius:12px;padding:20px;margin:14px 0;text-align:center;color:var(--mu);font-family:system-ui,sans-serif;font-size:15px}
+.vid iframe,.vid video{width:100%;aspect-ratio:16/9;border:0;border-radius:8px}
+.prob{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:6px 20px 14px;margin:16px 0}
+details{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:8px 14px;margin:8px 0;font-family:system-ui,sans-serif;font-size:15px}summary{cursor:pointer;color:var(--ac);font-weight:600}
+svg{max-width:100%;height:auto}.small{color:var(--mu);font-size:.9rem}li{margin:4px 0}
+h1,h2,h3{font-family:'Fredoka','Trebuchet MS',system-ui,sans-serif;font-weight:600;letter-spacing:.01em}
+h3{border-left:5px solid var(--ac);padding-left:10px}
+.cover{position:relative;overflow:hidden;max-width:none;padding:80px 20px 70px;background:linear-gradient(135deg,#0b5fa5,#2b9be0 55%,#a5dcff);color:#fff;border-bottom:0}
+.cover>*{position:relative;z-index:1}
+.cover h1{font-size:clamp(2rem,6vw,3.4rem);color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.25)}
+.cover .small{color:#e6f5ff;letter-spacing:.12em;text-transform:uppercase}
+.cover svg{background:#fff;border-radius:18px;padding:12px;box-shadow:0 12px 30px rgba(10,50,90,.35);margin-top:10px}
+.cover .data{color:var(--tx);box-shadow:0 12px 30px rgba(10,50,90,.3)}
+.cover::before,.cover::after{position:absolute;font:700 2.6rem Georgia,serif;color:rgba(255,255,255,.2);animation:fl 7s ease-in-out infinite}
+.cover::before{content:'f′(x) = 0';left:5%;top:12%}
+.cover::after{content:'f″(x) > 0';right:5%;bottom:10%;animation-delay:-3s}
+@keyframes fl{50%{transform:translateY(-18px) rotate(3deg)}}
+@media(max-width:600px){.cover::before,.cover::after{font-size:1.4rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+section h2{display:flex;align-items:center;gap:.5rem;padding-bottom:.4rem;border-bottom:4px solid;border-image:linear-gradient(90deg,var(--ac),transparent) 1}
+#definiciones h2::before{content:'💡'}#videos h2::before{content:'🎬'}#resueltos h2::before{content:'✅'}#propuestos h2::before{content:'🏋️'}#fuentes h2::before{content:'📚'}
+section:nth-of-type(even){background:var(--hl);box-shadow:0 0 0 100vmax var(--hl);clip-path:inset(0 -100vmax)}
+section:nth-of-type(even) .box{background:var(--card)}
+.box{background:linear-gradient(90deg,var(--hl),var(--card))}
+.prob{border-top:6px solid var(--ac);box-shadow:0 6px 18px rgba(21,115,176,.15);transition:transform .2s}.prob:hover{transform:translateY(-3px)}
+.m{background:rgba(21,115,176,.1);padding:0 5px;border-radius:5px}
+th{background:linear-gradient(90deg,#1573b0,#3fa9ec);color:#fff}
+.vid{background:var(--hl);border-width:3px}.vid::before{content:'▶';display:block;font-size:2.6rem;color:var(--ac)}
+nav{box-shadow:0 2px 10px rgba(21,115,176,.18)}nav a.on{background:var(--ac);color:var(--card)}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#a5dcff,#1573b0);z-index:9}
+nav,table,details,.vid,.cover .data{font-family:'Nunito',system-ui,sans-serif}
+body{background-image:radial-gradient(rgba(21,115,176,.09) 1.5px,transparent 1.5px);background-size:22px 22px}
+.cover{clip-path:ellipse(150% 100% at 50% 0)}
+.chip{display:inline-block;margin:4px;padding:5px 15px;border-radius:20px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.55);font-size:14px;font-weight:700}
+li::marker{color:var(--ac);font-weight:700}
+.box{border-radius:12px}
+footer{padding:34px 20px;text-align:center;background:linear-gradient(135deg,#0b5fa5,#2b9be0);color:#fff;font-size:15px;line-height:1.7}footer b{font-family:'Fredoka',system-ui,sans-serif;font-size:1.15rem;font-weight:500}
+.vid.ok::before{display:none}.vid.ok .vbtn{padding:8px 20px;font-size:14px;margin-top:12px}
+.vbtn{display:inline-block;margin-top:6px;padding:12px 26px;border-radius:30px;background:linear-gradient(135deg,#0b5fa5,#2b9be0);color:#fff;text-decoration:none;font-weight:700;font-size:16px;box-shadow:0 6px 16px rgba(10,50,90,.25);transition:transform .2s}.vbtn:hover{transform:translateY(-2px)}
+#top{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:44px;height:44px;border-radius:50%;background:var(--ac);color:var(--card);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:20px;box-shadow:0 4px 14px rgba(10,50,90,.3);z-index:8}
+details[open]{border-color:var(--ac);box-shadow:0 4px 14px rgba(21,115,176,.15)}
+summary{font-family:'Fredoka',system-ui,sans-serif;font-weight:500}
+</style></head><body>
+<nav><a href="#caratula">Carátula</a><a href="#definiciones">Definiciones</a><a href="#videos">Videos</a><a href="#resueltos">Resueltos</a><a href="#propuestos">Propuestos</a><a href="#fuentes">Fuentes</a></nav>
+
+<section id="caratula" class="cover">
+<div class="small">Universidad Mariano Gálvez de Guatemala</div>
+<h1>Criterio de la segunda derivada</h1>
+<p>Minicurso: cómo clasificar máximos y mínimos</p>
+<p><span class="chip">📐 Cálculo II</span><span class="chip">📈 Derivadas</span><span class="chip">🎯 Optimización</span></p>
+<svg viewBox="0 0 300 120" width="300" role="img" aria-label="Curva con un máximo y un mínimo"><path d="M10 100 C70 100 80 15 130 20 C180 25 170 105 220 100 C250 97 270 60 290 20" fill="none" stroke="#1573b0" stroke-width="3"/><circle cx="126" cy="20" r="5" fill="#c0392b"/><circle cx="215" cy="100" r="5" fill="#e08a1e"/><text x="116" y="12" font-size="11" fill="#c0392b">máx</text><text x="205" y="116" font-size="11" fill="#e08a1e">mín</text></svg>
+<div class="data">
+<b>Estudiante:</b> Jennifer Lucía Rodríguez Jacobo<br>
+<b>Institución:</b> Universidad Mariano Gálvez de Guatemala<br>
+<b>Facultad:</b> Ingeniería en Sistemas de Información<br>
+<b>Sede:</b> Portales &nbsp; <b>Curso:</b> Cálculo II &nbsp; <b>Sección:</b> B<br>
+<b>Fecha de entrega:</b> 25/10/2026
+</div>
+</section>
+
+<section id="definiciones">
+<h2>Introducción y definiciones</h2>
+<p>Para saber dónde una función alcanza sus valores más altos o más bajos en una zona, usamos derivadas. El criterio de la segunda derivada es un método rápido para decidir si un punto crítico es máximo o mínimo. Se usa en optimización: ganancias, áreas, costos.</p>
+<div class="box"><b>Al terminar podrás:</b><ol><li>Hallar los puntos críticos de una función.</li><li>Aplicar el criterio de la segunda derivada.</li><li>Resolver un problema sencillo de optimización.</li></ol><span class="small">Conocimientos previos: reglas de derivación y resolver ecuaciones.</span></div>
+
+<h3>Punto crítico (raíz de la derivada)</h3>
+<p>Es un valor <span class="m">x = c</span> del dominio donde <span class="m">f′(c) = 0</span> (o donde f′ no existe). Ahí la recta tangente es horizontal. Se encuentra resolviendo la ecuación <span class="m">f′(x) = 0</span>.</p>
+<h3>Concavidad</h3>
+<p>Si <span class="m">f″(x) &gt; 0</span> la gráfica abre hacia arriba (forma de copa ∪). Si <span class="m">f″(x) &lt; 0</span> abre hacia abajo (forma de ∩).</p>
+<h3>Criterio de la segunda derivada</h3>
+<p>Sea <span class="m">f′(c) = 0</span> y f″ continua cerca de c:</p>
+<div class="wrap"><table><tr><th>Valor de f″(c)</th><th>Conclusión</th></tr>
+<tr><td><span class="m">f″(c) &gt; 0</span></td><td>f tiene un <b>mínimo</b> en c</td></tr>
+<tr><td><span class="m">f″(c) &lt; 0</span></td><td>f tiene un <b>máximo</b> en c</td></tr>
+<tr><td><span class="m">f″(c) = 0</span></td><td>El criterio <b>no decide</b>; usar otro método (criterio de la primera derivada)</td></tr></table></div>
+<h3>Pasos del método</h3>
+<ol><li>Calcular f′(x) y f″(x).</li><li>Resolver f′(x) = 0 para hallar los puntos críticos.</li><li>Evaluar f″ en cada punto crítico y aplicar la tabla.</li><li>Calcular f(c) para dar el punto completo (c, f(c)).</li></ol>
+<h3>¿Por qué funciona? La idea intuitiva</h3>
+<p>La segunda derivada mide <b>cómo cambia la pendiente</b>. Si en un punto crítico la pendiente es cero y f″(c) &gt; 0, la pendiente está aumentando: antes era negativa (la curva bajaba) y después será positiva (la curva sube). Eso forma un valle, es decir, un mínimo. Si f″(c) &lt; 0 ocurre lo contrario: la curva sube y luego baja, formando una cima.</p>
+<svg viewBox='0 0 460 130' width='460' role='img' aria-label='Parábola que abre hacia arriba con mínimo y parábola que abre hacia abajo con máximo'><path d='M20 20 Q100 150 180 20' fill='none' stroke='#1573b0' stroke-width='3'/><line x1='60' y1='85' x2='140' y2='85' stroke='#c0392b' stroke-width='2' stroke-dasharray='4'/><text x='38' y='122' font-size='12' fill='currentColor'>f″ &gt; 0: mínimo</text><path d='M260 110 Q340 -20 420 110' fill='none' stroke='#1573b0' stroke-width='3'/><line x1='300' y1='45' x2='380' y2='45' stroke='#c0392b' stroke-width='2' stroke-dasharray='4'/><text x='283' y='126' font-size='12' fill='currentColor'>f″ &lt; 0: máximo</text></svg>
+<p class='small'>La línea roja punteada es la recta tangente horizontal en el punto crítico.</p>
+<h3>Relación con el criterio de la primera derivada</h3>
+<p>Ambos criterios llegan a la misma conclusión. El de la primera derivada mira el <b>signo de f′</b> a ambos lados de c:</p>
+<div class='wrap'><table><tr><th>Signo de f′ antes de c</th><th>Signo de f′ después de c</th><th>Conclusión</th></tr><tr><td>−</td><td>+</td><td>Mínimo</td></tr><tr><td>+</td><td>−</td><td>Máximo</td></tr><tr><td>+ o −</td><td>mismo signo</td><td>No hay extremo</td></tr></table></div>
+<h3>Cuando f″(c) = 0: tres posibilidades</h3>
+<div class='wrap'><table><tr><th>Función</th><th>En x = 0</th><th>Resultado</th></tr><tr><td><span class='m'>f(x) = x⁴</span></td><td>f′(0) = 0, f″(0) = 0</td><td>Mínimo</td></tr><tr><td><span class='m'>f(x) = −x⁴</span></td><td>f′(0) = 0, f″(0) = 0</td><td>Máximo</td></tr><tr><td><span class='m'>f(x) = x³</span></td><td>f′(0) = 0, f″(0) = 0</td><td>Ni máximo ni mínimo</td></tr></table></div>
+<p>Por eso, si f″(c) = 0, <b>no se puede concluir nada</b> con este criterio y hay que usar el signo de f′.</p>
+<h3>Máximos y mínimos en un intervalo cerrado</h3>
+<p>Si la función se estudia en un intervalo cerrado [a, b], además de los puntos críticos hay que comparar los valores de f en los extremos a y b. El mayor de todos esos valores es el máximo en el intervalo y el menor es el mínimo.</p>
+<h3>Errores comunes</h3>
+<ul><li>Olvidar derivar dos veces o confundir f′ con f″.</li><li>Evaluar f″ en lugar de f para dar la altura del punto (la coordenada y).</li><li>Concluir «mínimo» solo porque f″(c) = 0. Ese caso no decide.</li><li>Dejar fuera puntos críticos al factorizar (por ejemplo, perder x = 0 en 4x(x² − 4)).</li><li>Aceptar soluciones fuera del dominio en problemas de aplicación.</li></ul>
+<div class='box'><b>Resumen:</b> derivar dos veces → f′(x) = 0 → evaluar f″ en cada solución → ( + mínimo, − máximo, 0 no decide ) → calcular f(c).</div>
+</section>
+
+<section id="videos">
+<h2>Tres videos de ejemplo</h2>
+<p class="small">Cada video dura máximo 1 minuto y resuelve un ejemplo distinto.</p>
+<h3>Video 1: mínimo — <span class="m">f(x) = x² − 4x + 1</span></h3>
+<div class="vid"><a class="vbtn" href="https://youtu.be/kXMS7R3zFqE" target="_blank" rel="noopener">Ver el video 1 en YouTube</a><br><span class="small">Se abre en una pestaña nueva</span></div>
+<div class="box"><b>Qué se resuelve:</b> f′(x) = 2x − 4 = 0 ⇒ x = 2. Como f″(x) = 2 &gt; 0, hay un <b>mínimo</b> en (2, −3).</div>
+<h3>Video 2: máximo — <span class="m">f(x) = −x³ + 3x</span></h3>
+<div class="vid"><a class="vbtn" href="https://youtu.be/jAFWuVhbGyM" target="_blank" rel="noopener">Ver el video 2 en YouTube</a><br><span class="small">Se abre en una pestaña nueva</span></div>
+<div class="box"><b>Qué se resuelve:</b> f′(x) = −3x² + 3 = 0 ⇒ x = ±1, y f″(x) = −6x. Con f″(1) = −6 &lt; 0 hay un <b>máximo</b> en (1, 2); con f″(−1) = 6 &gt; 0 hay un <b>mínimo</b> en (−1, −2).</div>
+<h3>Video 3: el criterio no decide — <span class="m">f(x) = x⁴</span></h3>
+<div class="vid"><a class="vbtn" href="https://youtu.be/KaoAHV2r8hI" target="_blank" rel="noopener">Ver el video 3 en YouTube</a><br><span class="small">Se abre en una pestaña nueva</span></div>
+<div class="box"><b>Qué se resuelve:</b> f′(x) = 4x³ = 0 ⇒ x = 0, pero f″(0) = 0: el criterio no decide. Con la primera derivada, f′ es negativa a la izquierda y positiva a la derecha, así que hay un <b>mínimo</b> en (0, 0).</div>
+</section>
+
+<section id="resueltos">
+<h2>Problemas resueltos</h2>
+
+<div class="prob"><h3>Problema 1</h3>
+<p>Clasifica los puntos críticos de <span class="m">f(x) = x³ − 6x² + 9x + 2</span>.</p>
+<p><b>1)</b> <span class="m">f′(x) = 3x² − 12x + 9</span> y <span class="m">f″(x) = 6x − 12</span>.<br>
+<b>2)</b> <span class="m">3x² − 12x + 9 = 0 ⇒ 3(x − 1)(x − 3) = 0</span>, entonces <span class="m">x = 1</span> y <span class="m">x = 3</span>.<br>
+<b>3)</b> <span class="m">f″(1) = −6 &lt; 0</span> ⇒ máximo. <span class="m">f″(3) = 6 &gt; 0</span> ⇒ mínimo.<br>
+<b>4)</b> <span class="m">f(1) = 1 − 6 + 9 + 2 = 6</span>; <span class="m">f(3) = 27 − 54 + 27 + 2 = 2</span>.</p>
+<p><b>✔ Comprobación:</b> f′(0) = 9 &gt; 0 (la curva sube), f′(2) = −3 &lt; 0 (baja) y f′(4) = 9 &gt; 0 (sube). La pendiente pasa de + a − en x = 1 (máximo) y de − a + en x = 3 (mínimo).</p>
+<div class="wrap"><svg viewBox="0 0 460 240" width="460" role="img" aria-label="Gráfica de f(x) = x³ − 6x² + 9x + 2 con máximo en (1, 6) y mínimo en (3, 2)"><line x1="40" y1="163.4" x2="435" y2="163.4" style="stroke:var(--mu)" stroke-width="1.5"/><line x1="78" y1="15" x2="78" y2="220" style="stroke:var(--mu)" stroke-width="1.5"/><polyline points="40.0,210.7 55.2,177.9 70.4,151.5 85.6,130.8 100.8,115.4 116.0,104.6 131.2,98.0 146.4,94.9 161.6,94.9 176.8,97.3 192.0,101.7 207.2,107.5 222.4,114.1 237.6,120.9 252.8,127.5 268.0,133.3 283.2,137.7 298.4,140.1 313.6,140.1 328.8,137.0 344.0,130.4 359.2,119.6 374.4,104.2 389.6,83.5 404.8,57.1 420.0,24.3" fill="none" style="stroke:var(--ac)" stroke-width="3.5" stroke-linejoin="round"/><circle cx="154" cy="94.6" r="6" fill="#c0392b"/><circle cx="306" cy="140.4" r="6" fill="#e08a1e"/><text x="164" y="80" font-size="13" fill="currentColor">máx (1, 6)</text><text x="276" y="188" font-size="13" fill="currentColor">mín (3, 2)</text><text x="120" y="234" font-size="12" fill="currentColor">Gráfica de f(x) = x³ − 6x² + 9x + 2</text></svg></div>
+<div class="box"><b>Respuesta:</b> máximo en (1, 6) y mínimo en (3, 2).</div></div>
+
+<div class="prob"><h3>Problema 2</h3>
+<p>Clasifica los puntos críticos de <span class="m">f(x) = x⁴ − 8x² + 3</span>.</p>
+<p><b>1)</b> <span class="m">f′(x) = 4x³ − 16x</span> y <span class="m">f″(x) = 12x² − 16</span>.<br>
+<b>2)</b> <span class="m">4x(x² − 4) = 0 ⇒ x = 0, x = 2, x = −2</span>.<br>
+<b>3)</b> <span class="m">f″(0) = −16 &lt; 0</span> ⇒ máximo. <span class="m">f″(±2) = 32 &gt; 0</span> ⇒ mínimos.<br>
+<b>4)</b> <span class="m">f(0) = 3</span>; <span class="m">f(±2) = 16 − 32 + 3 = −13</span>.</p>
+<p><b>✔ Comprobación:</b> el signo de f′(x) = 4x(x² − 4) en cada tramo es: x = −3 → −; x = −1 → +; x = 1 → −; x = 3 → +. Cambia de − a + en x = −2 y x = 2 (mínimos) y de + a − en x = 0 (máximo).</p>
+<div class="box"><b>Respuesta:</b> máximo en (0, 3); mínimos en (−2, −13) y (2, −13).</div></div>
+
+<div class="prob"><h3>Problema 3 (aplicación)</h3>
+<p>Un rectángulo tiene perímetro de 40 m. ¿Qué dimensiones dan el área máxima?</p>
+<p><b>1)</b> Si un lado es x, el otro es 20 − x. Área: <span class="m">A(x) = x(20 − x) = 20x − x²</span>.<br>
+<b>2)</b> <span class="m">A′(x) = 20 − 2x = 0 ⇒ x = 10</span>.<br>
+<b>3)</b> <span class="m">A″(x) = −2 &lt; 0</span> ⇒ máximo.<br>
+<b>4)</b> Comprobación: <span class="m">A(10) = 100</span>; con x = 9, A = 99, y con x = 11, A = 99, menores.</p>
+<div class="box"><b>Respuesta:</b> un cuadrado de 10 m × 10 m, con área máxima de 100 m².</div></div>
+
+<div class='prob'><h3>Problema 4</h3>
+<p>Clasifica los puntos críticos de <span class='m'>f(x) = x³ − 3x² − 9x + 5</span>.</p>
+<p><b>1)</b> <span class='m'>f′(x) = 3x² − 6x − 9</span> y <span class='m'>f″(x) = 6x − 6</span>.<br>
+<b>2)</b> <span class='m'>3(x² − 2x − 3) = 3(x − 3)(x + 1) = 0</span>, entonces <span class='m'>x = 3</span> y <span class='m'>x = −1</span>.<br>
+<b>3)</b> <span class='m'>f″(3) = 12 &gt; 0</span> ⇒ mínimo. <span class='m'>f″(−1) = −12 &lt; 0</span> ⇒ máximo.<br>
+<b>4)</b> <span class='m'>f(3) = 27 − 27 − 27 + 5 = −22</span>; <span class='m'>f(−1) = −1 − 3 + 9 + 5 = 10</span>.</p>
+<p><b>✔ Comprobación:</b> f′(−2) = 15 &gt; 0, f′(0) = −9 &lt; 0 y f′(4) = 15 &gt; 0. La pendiente pasa de + a − en x = −1 (máximo) y de − a + en x = 3 (mínimo).</p>
+<div class='box'><b>Respuesta:</b> máximo en (−1, 10) y mínimo en (3, −22).</div></div>
+
+<div class='prob'><h3>Problema 5 (cuando el criterio no decide)</h3>
+<p>Analiza el punto crítico de <span class='m'>f(x) = x³</span>.</p>
+<p><b>1)</b> <span class='m'>f′(x) = 3x²</span> y <span class='m'>f″(x) = 6x</span>.<br>
+<b>2)</b> <span class='m'>3x² = 0 ⇒ x = 0</span>.<br>
+<b>3)</b> <span class='m'>f″(0) = 0</span>: el criterio no decide.<br>
+<b>4)</b> Primera derivada: para x = −1, f′ = 3 &gt; 0; para x = 1, f′ = 3 &gt; 0. El signo no cambia.</p>
+<div class='box'><b>Respuesta:</b> en x = 0 no hay máximo ni mínimo; la función siempre crece.</div></div>
+
+<div class='prob'><h3>Problema 6 (aplicación: volumen máximo)</h3>
+<p>De una hoja cuadrada de 12 cm de lado se cortan cuadrados de lado x en las esquinas y se doblan los lados para formar una caja sin tapa. ¿Qué x da el mayor volumen?</p>
+<p><b>1)</b> Base: (12 − 2x) por (12 − 2x); altura: x. <span class='m'>V(x) = x(12 − 2x)² = 4x³ − 48x² + 144x</span>, con <span class='m'>0 &lt; x &lt; 6</span>.<br>
+<b>2)</b> <span class='m'>V′(x) = 12x² − 96x + 144 = 12(x − 2)(x − 6) = 0</span>, entonces x = 2 o x = 6. Se descarta x = 6 (fuera del dominio abierto, la caja sería plana).<br>
+<b>3)</b> <span class='m'>V″(x) = 24x − 96</span>; <span class='m'>V″(2) = −48 &lt; 0</span> ⇒ máximo.<br>
+<b>4)</b> <span class='m'>V(2) = 2 · 8² = 128</span>.</p>
+<p><b>✔ Comprobación:</b> V(1) = 1 · 10² = 100 cm³ y V(3) = 3 · 6² = 108 cm³, ambos menores que V(2) = 128 cm³.</p>
+<div class='box'><b>Respuesta:</b> cortar cuadrados de 2 cm; el volumen máximo es 128 cm³.</div></div>
+</section>
+
+<section id="propuestos">
+<h2>Problemas propuestos</h2>
+<p>Ordenados de menor a mayor dificultad. Clasifica los puntos críticos de cada función y da las coordenadas.</p>
+<ol>
+<li><span class="m">f(x) = x² − 6x + 5</span></li>
+<li><span class="m">f(x) = −2x² + 8x</span></li>
+<li><span class="m">f(x) = x³ − 3x</span></li>
+<li><span class="m">f(x) = 2x³ − 9x² + 12x</span></li>
+<li><span class="m">f(x) = x⁴ − 4x³</span> (un punto crítico no se decide con f″; analízalo con la primera derivada)</li>
+<li>La ganancia de una empresa es <span class="m">G(x) = −x² + 60x − 500</span> (miles de quetzales, x unidades). ¿Cuántas unidades dan la ganancia máxima y cuál es?</li>
+<li><span class='m'>f(x) = x³ − 12x + 1</span></li>
+<li><span class='m'>f(x) = x⁴ − 2x²</span></li>
+<li><span class='m'>f(x) = x³ + 3x² − 24x</span></li>
+<li><span class='m'>f(x) = 3x⁵ − 5x³</span> (hay un punto donde f″ vale 0: analízalo con la primera derivada)</li>
+<li>Se quiere cercar un terreno rectangular junto a un río con 100 m de cerca. El lado del río no necesita cerca. ¿Qué dimensiones dan el área máxima y cuál es?</li>
+<li>Dos números positivos tienen producto 36. ¿Cuáles deben ser para que su suma sea mínima? (Pista: <span class='m'>S(x) = x + 36/x</span>)</li>
+</ol>
+<details><summary>Ver respuestas finales</summary><ol>
+<li>Mínimo en (3, −4).</li>
+<li>Máximo en (2, 8).</li>
+<li>Máximo en (−1, 2); mínimo en (1, −2).</li>
+<li>Máximo en (1, 5); mínimo en (2, 4).</li>
+<li>x = 0: f″(0) = 0, no decide (f′ no cambia de signo, no es extremo). x = 3: mínimo en (3, −27).</li>
+<li>x = 30 unidades; ganancia máxima G(30) = 400 (miles de quetzales).</li>
+<li>Máximo en (−2, 17); mínimo en (2, −15).</li>
+<li>Máximo en (0, 0); mínimos en (−1, −1) y (1, −1).</li>
+<li>Máximo en (−4, 80); mínimo en (2, −28).</li>
+<li>Mínimo en (1, −2); máximo en (−1, 2); en x = 0, f″ = 0 y f′ no cambia de signo (negativa a ambos lados), por lo que no hay extremo.</li>
+<li>Lados de 25 m (perpendiculares al río) y 50 m (paralelo al río); área máxima 1250 m².</li>
+<li>Los números son 6 y 6; suma mínima 12.</li></ol></details>
+</section>
+
+<section id="fuentes">
+<h2>Fuentes consultadas</h2>
+<ul>
+<li>Stewart, J. <i>Cálculo de una variable: trascendentes tempranas</i>. Cengage Learning. (capítulo de aplicaciones de la derivada)</li>
+<li>Larson, R. y Edwards, B. <i>Cálculo</i>. Cengage Learning.</li>
+<li>Khan Academy en español: <a href="https://es.khanacademy.org" style="color:var(--ac)">es.khanacademy.org</a> (sección de aplicaciones de las derivadas).</li>
+<li>Gráficas de apoyo: GeoGebra, <a href="https://www.geogebra.org" style="color:var(--ac)">geogebra.org</a>.</li>
+<li>Ilustración de la carátula: elaboración propia.</li>
+</ul>
+<p class="small">Ejemplos, problemas y explicaciones elaborados por el estudiante.</p>
+</section>
+<footer><b>Criterio de la segunda derivada</b><br>Universidad Mariano Gálvez de Guatemala · Facultad de Ingeniería en Sistemas de Información · Sede Portales<br>Cálculo II · Sección B · Jennifer Lucía Rodríguez Jacobo · 25/10/2026</footer>
+<a id="top" href="#caratula" aria-label="Volver arriba">↑</a>
+<div id="bar"></div>
+<script>
+(function(){var b=document.getElementById('bar'),L=document.querySelectorAll('nav a');
+addEventListener('scroll',function(){var h=document.documentElement;b.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){L.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-40% 0px -55% 0px'});document.querySelectorAll('section').forEach(function(s){io.observe(s)})}})();
+</script>
+</body></html>
